@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>mrob_highlevel_controller</name>
+  <version>0.0.2</version>
+  <description>The mrob_highlevel_controller package</description>
+  <license>None</license>
+  <author>Carlos Mateo-Agullo</author>
+  <maintainer email="pierre.desbruns@esirem.fr">Carlos Mateo-Agullo</maintainer>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+
+  <export>
+  </export>
+</package>
