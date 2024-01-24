@@ -1,0 +1,18 @@
+<launch>
+    <!-- Gazebo launch -->
+    <include file="$(find mrob_gazebo)/launch/mrob_gazebo.launch">
+        <arg name="world" value="turtlebot3_autorace"/>
+        <arg name="enable_ekf" value="true"/>
+    </include>
+    
+    <!-- Teleop launch -->
+    <node name="Teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+
+    <!-- Controller launch -->
+    <node name="HighlevelController" pkg="mrob_highlevel_controller" type="controller" output="screen">
+        <rosparam command="load" file="$(find mrob_highlevel_controller)/config/params.yaml"/>
+    </node>
+
+    <!-- Rviz launch -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mrob_highlevel_controller)/rviz/config.rviz"/>
+</launch>
