@@ -5,6 +5,8 @@ add_compile_options(-std=c++14)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  sensor_msgs
+  geometry_msgs
 )
 find_package(Eigen3 REQUIRED)
 

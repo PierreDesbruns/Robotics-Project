@@ -1,2 +1,7 @@
-name: scan
-queue_size: 1000
+scan_topic_name: /scan
+scan_queue_size: 1000
+
+vel_topic_name: /cmd_vel
+vel_queue_size: 1000
+vel_linear_speed: 1.0
+vel_angular_speed: 0.5
