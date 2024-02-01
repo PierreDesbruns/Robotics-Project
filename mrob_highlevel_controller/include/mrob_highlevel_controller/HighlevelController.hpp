@@ -9,6 +9,12 @@
 // Twist
 #include <geometry_msgs/Twist.h>
 
+// Marker
+#include <visualization_msgs/Marker.h>
+
+// Maths
+#include <math.h>
+
 namespace mrob_highlevel_controller {
 
 /*!
@@ -50,6 +56,9 @@ class HighlevelController
   int vel_queueSize_;
   float vel_linSpeed_;
   float vel_angSpeed_;
+
+  //! ROS publisher on visualization_marker topic
+  ros::Publisher vis_publisher_;
 };
 
 } /* namespace */

@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   geometry_msgs
+  visualization_msgs
 )
 find_package(Eigen3 REQUIRED)
 
