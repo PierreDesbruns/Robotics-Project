@@ -4,7 +4,16 @@
 #include <ros/ros.h>
 
 // LaserScan
-#include "sensor_msgs/LaserScan.h"
+#include <sensor_msgs/LaserScan.h>
+
+// Twist
+#include <geometry_msgs/Twist.h>
+
+// Marker
+#include <visualization_msgs/Marker.h>
+
+// Maths
+#include <math.h>
 
 namespace mrob_highlevel_controller {
 
@@ -37,7 +46,19 @@ class HighlevelController
   ros::NodeHandle& nodeHandle_;
 
   //! ROS subscriber to /scan topic
-  ros::Subscriber scanSub_;
+  ros::Subscriber scan_subscriber_;
+  std::string scan_topicName_;
+  int scan_queueSize_;
+
+  //! ROS publisher on /cmd_vel topic
+  ros::Publisher vel_publisher_;
+  std::string vel_topicName_;
+  int vel_queueSize_;
+  float vel_linSpeed_;
+  float vel_angSpeed_;
+
+  //! ROS publisher on visualization_marker topic
+  ros::Publisher vis_publisher_;
 };
 
 } /* namespace */

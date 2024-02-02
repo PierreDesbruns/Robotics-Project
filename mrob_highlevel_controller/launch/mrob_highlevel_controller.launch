@@ -1,12 +1,11 @@
 <launch>
     <!-- Gazebo launch -->
     <include file="$(find mrob_gazebo)/launch/mrob_gazebo.launch">
-        <arg name="world" value="turtlebot3_autorace"/>
+        <arg name="world_file" value="$(find mrob_highlevel_controller)/worlds/singlePillar.world"/>
         <arg name="enable_ekf" value="true"/>
+        <arg name="x_pos" value="2.0"/>
+        <arg name="y_pos" value="2.0"/>
     </include>
-    
-    <!-- Teleop launch -->
-    <node name="Teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
 
     <!-- Controller launch -->
     <node name="HighlevelController" pkg="mrob_highlevel_controller" type="controller" output="screen">

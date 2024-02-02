@@ -4,11 +4,14 @@
   <version>0.0.2</version>
   <description>The mrob_highlevel_controller package</description>
   <license>None</license>
-  <author>Carlos Mateo-Agullo</author>
-  <maintainer email="pierre.desbruns@esirem.fr">Carlos Mateo-Agullo</maintainer>
+  <author>Pierre Desbruns</author>
+  <maintainer email="pierre.desbruns@esirem.fr">Pierre Desbruns</maintainer>
   
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
 
   <export>
   </export>
