@@ -5,7 +5,7 @@
 			"type": "catkin_make",
 			"args": [
 				"--directory",
-				"/home/masters/workspaces/catkin_ws",
+				"~/PierreDesbruns/catkin_ws",
 				"-DCMAKE_BUILD_TYPE=RelWithDebInfo",
 				"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 			],

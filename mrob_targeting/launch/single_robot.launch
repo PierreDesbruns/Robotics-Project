@@ -1,0 +1,30 @@
+<launch>
+    <!-- Model path -->
+    <arg name="robot_namespace"     default=""/>
+    <arg name="robot_model_name"    default="burger"/>
+    <arg name="enable_ekf"          default="false"/>
+    <arg name="camera_on"           default="false"/>
+    <arg name="lidar_visual"        default="false"/>
+    <arg name="robot_description" default="robot_description"/>
+
+    <arg name="x_pos"   default="0.0"/>
+    <arg name="y_pos"   default="0.0"/>
+    <arg name="z_pos"   default="0.0"/>  
+    <arg name="roll"    default="0.0"/>
+    <arg name="pitch"   default="0.0"/>
+    <arg name="yaw"     default="0.0"/>
+
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" 
+        args="-urdf -model $(arg robot_model_name) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos)
+        -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
+        -param $(arg robot_description)" 
+        output="screen"/>
+
+    <include file="$(find mrob_control)/launch/control.launch">
+        <arg name="laser_visual"        default="$(arg lidar_visual)"/>
+        <arg name="camera_on"           default="$(arg camera_on)"/>
+        <arg name="robot_namespace"     default="$(arg robot_namespace)"/>
+        <arg name="robot_description"   default="$(arg robot_description)"/>
+        <arg name="enable_ekf"          default="$(arg enable_ekf)" />
+    </include>
+</launch>    

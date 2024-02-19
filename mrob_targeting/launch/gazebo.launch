@@ -1,0 +1,67 @@
+<launch>
+
+    <!-- GAZEBO ARGUMENTS -->
+    <env name="GAZEBO_RESOURCE_PATH" value="$(find turtlebot3_gazebo)/models/autorace/ground_picture" />
+    <!-- Run Gazebo headless -->
+    <arg name="headless"                              default="false"/>
+    <!-- Model path -->
+    <arg name="robot1_namespace"                     default="leader"/>
+    <arg name="robot2_namespace"                     default="follower"/>
+    <arg name="robot1_model_name"                    default="burger1"/>
+    <arg name="robot2_model_name"                    default="burger2"/>
+    <arg name="robot_namespace"                      default=""/>
+    <arg name="robot_model_name"                     default="burger"/>
+    <arg name="enable_ekf"                           default="false"/>
+    <arg name="camera_on"                            default="false"/>
+    <arg name="lidar_visual"                         default="false"/>
+
+    <arg name="world"                                 default="empty"/>
+    <arg name="world_file"                            default="$(find mrob_targeting)/worlds/$(arg world).world"/>
+
+    <arg name="paused"                                default="false"/>
+    <arg name="use_sim_time"                          default="true"/>
+    <arg name="debug"                                 default="false"/>
+    <arg name="verbose"                               default="true"/>
+
+    <!-- Enable/disable Gazebo GUI -->
+    <arg name="run_gui"                               default="true"/>
+    
+    <!-- Name of the robot description parameter -->
+    <arg name="robot_description" default="robot_description"/>
+
+    <!-- Load Gazebo world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name"        value="$(arg world_file)"/>
+        <arg name="paused"            value="$(arg paused)"/>
+        <arg name="use_sim_time"      value="$(arg use_sim_time)"/>
+        <arg name="gui"               value="$(arg run_gui)"/>
+        <arg name="headless"          value="$(arg headless)"/>
+        <arg name="debug"             value="$(arg debug)"/>
+        <arg name="verbose"           value="$(arg verbose)"/>
+    </include>
+
+    <!-- Spawn robots in Gazebo -->
+    <group ns="$(arg robot1_namespace)">
+        <include file="$(find mrob_targeting)/launch/single_robot.launch">
+            <arg name="robot_namespace"     value="$(arg robot1_namespace)"/>
+            <arg name="robot_model_name"   value="$(arg robot1_model_name)"/>
+            <arg name="x_pos"   value="1.0"/>
+            <arg name="y_pos"   value="0.0"/>
+        </include>
+
+    </group>
+    <group ns="$(arg robot2_namespace)">
+        <include file="$(find mrob_targeting)/launch/single_robot.launch">
+            <arg name="robot_namespace"     value="$(arg robot2_namespace)"/>
+            <arg name="robot_model_name"   value="$(arg robot2_model_name)"/>
+            <arg name="x_pos"   value="0.0"/>
+            <arg name="y_pos"   value="0.0"/>
+        </include>
+    </group>
+
+    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
+        <remap from="cmd_vel" to="$(arg robot1_namespace)/cmd_vel"/>
+    </node>
+
+    
+</launch>

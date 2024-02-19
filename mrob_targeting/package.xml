@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>mrob_targeting</name>
+  <version>1.0.0</version>
+  <description>The mrob_targeting package</description>
+  <license>None</license>
+  <author>Pierre Desbruns</author>
+  <maintainer email="Pierre_Desbruns@etu.u-bourgogne.fr">Pierre Desbruns</maintainer>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+  </export>
+</package>
