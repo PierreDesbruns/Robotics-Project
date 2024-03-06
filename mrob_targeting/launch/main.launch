@@ -1,29 +1,20 @@
 <launch>
 
-    <!-- GAZEBO ARGUMENTS -->
     <env name="GAZEBO_RESOURCE_PATH" value="$(find turtlebot3_gazebo)/models/autorace/ground_picture" />
-    <!-- Run Gazebo headless -->
     <arg name="headless"                              default="false"/>
-    <!-- Model path -->
     <arg name="robot1_namespace"                     default="leader"/>
     <arg name="robot2_namespace"                     default="follower"/>
     <arg name="robot1_model_name"                    default="burger1"/>
     <arg name="robot2_model_name"                    default="burger2"/>
     <arg name="enable_ekf"                           default="false"/>
     <arg name="lidar_visual"                         default="false"/>
-
     <arg name="world"                                 default="empty"/>
     <arg name="world_file"                            default="$(find mrob_targeting)/worlds/$(arg world).world"/>
-
     <arg name="paused"                                default="false"/>
     <arg name="use_sim_time"                          default="true"/>
     <arg name="debug"                                 default="false"/>
     <arg name="verbose"                               default="true"/>
-
-    <!-- Enable/disable Gazebo GUI -->
     <arg name="run_gui"                               default="true"/>
-    
-    <!-- Name of the robot description parameter -->
     <arg name="robot_description" default="robot_description"/>
 
     <!-- Load Gazebo world -->
@@ -64,8 +55,8 @@
         </include>
     </group>
 
-    <!-- Rqt -->
-    <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph"/>
+    <!-- Rqt for camera visualization -->
+    <node pkg="rqt_image_view" type="rqt_image_view" name="rqt_image_view" args="/$(arg robot2_namespace)/camera/image"/>
 
     
 </launch>

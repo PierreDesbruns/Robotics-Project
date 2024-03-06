@@ -1,0 +1,43 @@
+<launch>
+
+    <env name="GAZEBO_RESOURCE_PATH" value="$(find turtlebot3_gazebo)/models/autorace/ground_picture" />
+    <arg name="headless"                            default="false"/>
+    <arg name="robot_namespace"                     default=""/>
+    <arg name="robot_model_name"                    default="burger"/>
+    <arg name="enable_ekf"                          default="false"/>
+    <arg name="lidar_visual"                        default="false"/>
+    <arg name="world"                               default="aruco"/>
+    <arg name="world_file"                          default="$(find mrob_targeting)/worlds/$(arg world).world"/>
+    <arg name="paused"                              default="false"/>
+    <arg name="use_sim_time"                        default="true"/>
+    <arg name="debug"                               default="false"/>
+    <arg name="verbose"                             default="true"/>
+    <arg name="run_gui"                             default="true"/>
+    <arg name="robot_description"                   default="robot_description"/>
+
+    <!-- Load Gazebo world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name"        value="$(arg world_file)"/>
+        <arg name="paused"            value="$(arg paused)"/>
+        <arg name="use_sim_time"      value="$(arg use_sim_time)"/>
+        <arg name="gui"               value="$(arg run_gui)"/>
+        <arg name="headless"          value="$(arg headless)"/>
+        <arg name="debug"             value="$(arg debug)"/>
+        <arg name="verbose"           value="$(arg verbose)"/>
+    </include>
+
+    <!-- Spawn robot in Gazebo -->
+    <include file="$(find mrob_targeting)/launch/single_robot.launch">
+        <arg name="robot_namespace"   value="$(arg robot_namespace)"/>
+        <arg name="robot_model_name"  value="$(arg robot_model_name)"/>
+        <arg name="robot_description" value="$(arg robot_description)"/>
+        <arg name="x_pos"   value="0.0"/>
+        <arg name="y_pos"   value="0.0"/>
+        <arg name="camera_on" value="true"/>
+    </include>
+
+    <!-- Rqt for camera visualization -->
+    <node pkg="rqt_image_view" type="rqt_image_view" name="rqt_image_view" args="/camera/image"/>
+
+    
+</launch>
